@@ -1,29 +1,29 @@
 import React, { Component } from "react";
-import AddTodo from "./Add";
-class ListTodo extends Component {
+import AddBook from "./Add";
+class Book extends Component {
   state = {
-    listTodos: [
+    Books: [
       { id: 1, title: "I love you so" },
       { id: 2, title: "You!!!" },
     ],
   };
 
-  addNewTodo = (todo) => {
+  addNewBook = (todo) => {
     this.setState({
-      listTodos: [...this.state.listTodos, todo],
+      Books: [...this.state.Books, todo],
     });
   };
   render() {
-    let { listTodos } = this.state;
+    let { Books } = this.state;
     return (
-      <div className="list-todo-container">
-        <AddTodo addNewTodo={this.addNewTodo} />
-        <div className="list-todo-content">
-          {listTodos &&
-            listTodos.length > 0 &&
-            listTodos.map((item, index) => {
+      <div className="list-book-container">
+        <AddBook addNewBook={this.addNewBook} />
+        <div className="list-book-content">
+          {Books &&
+            Books.length > 0 &&
+            Books.map((item, index) => {
               return (
-                <div className="todo-child" key={item.id}>
+                <div className="book-child" key={item.id}>
                   <span>
                     {index + 1} - {item.title}
                   </span>
@@ -37,4 +37,4 @@ class ListTodo extends Component {
     );
   }
 }
-export default ListTodo;
+export default Book;

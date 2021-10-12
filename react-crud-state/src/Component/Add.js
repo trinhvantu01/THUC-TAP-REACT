@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-class AddTodo extends Component {
+class addBook extends Component {
   state = {
     title: "",
   };
@@ -10,11 +10,11 @@ class AddTodo extends Component {
   };
 
   handleAdd = () => {
-    let todo = {
+    let book = {
       id: Math.floor(Math.random() * 10000),
       title: this.state.title,
     };
-    this.props.addNewTodo(todo);
+    this.props.addNewBook(book);
     this.setState({
       title: "",
     });
@@ -22,7 +22,7 @@ class AddTodo extends Component {
   render() {
     let { title } = this.state;
     return (
-      <div className="add-todo">
+      <div className="add-book">
         <input
           type="text"
           value={title}
@@ -37,4 +37,4 @@ class AddTodo extends Component {
     );
   }
 }
-export default AddTodo;
+export default addBook;
