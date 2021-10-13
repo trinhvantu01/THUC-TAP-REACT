@@ -44,7 +44,7 @@ class Book extends Component {
             listBook.length > 0 &&
             listBook.map((item, index) => {
               return (
-                <div className="book-child" key={item.id}>
+                <div className="book-child">
                   <button> {index + 1} </button>
 
                   <input value={item.title} />
