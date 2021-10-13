@@ -3,7 +3,7 @@ import AddBook from "./Add";
 import { toast } from "react-toastify";
 class Book extends Component {
   state = {
-    Books: [
+    listBook: [
       { id: 1, title: "I love you so" },
       { id: 2, title: "My dad love me" },
       { id: 3, title: "You!!!" },
@@ -12,17 +12,17 @@ class Book extends Component {
 
   addNewBook = (book) => {
     this.setState({
-      Books: [...this.state.Books, book],
+      listBook: [...this.state.listBook, book],
     });
     toast.success("Thêm Mới Thành Công");
   };
 
   handleDeleteBook = (book) => {
     // console.log(book);
-    let currentBook = this.state.Books;
+    let currentBook = this.state.listBook;
     currentBook = currentBook.filter((item) => item.id !== book.id);
     this.setState({
-      Books: currentBook,
+      listBook: currentBook,
     });
     toast.success("Xóa Thành Công");
   };
@@ -34,15 +34,15 @@ class Book extends Component {
   };
 
   render() {
-    let { Books } = this.state;
+    let { listBook } = this.state;
 
     return (
       <div className="list-book-container">
         <AddBook addNewBook={this.addNewBook} />
         <div className="list-book-content">
-          {Books &&
-            Books.length > 0 &&
-            Books.map((item, index) => {
+          {listBook &&
+            listBook.length > 0 &&
+            listBook.map((item, index) => {
               return (
                 <div className="book-child" key={item.id}>
                   <button> {index + 1} </button>
