@@ -9,6 +9,7 @@ const rootReducer = (state = initState,action) =>{
 
     switch(action.type) {
         case 'DELETE_USER':
+            console.log(action.payload);
         let users = state.users;
         users = users.filter(item =>item.id !== action.payload.id)
             return {
@@ -16,12 +17,12 @@ const rootReducer = (state = initState,action) =>{
             };
 
         case 'ADD_USER':
-            let id = Math.floor(Math.random()*10)
-            let user = { id: id, name:`random - ${id}`,email:`random - ${id}`}
-          
-         return{
-             ...state,users: [...state.users,user]
-         }
+            // let users = state.users;
+            // console.log(action.payload);    
+            // console.log(state.users);    
+            return{
+                ...state,users: [...state.users,action.payload]
+            }
         default:
             return state;
       }
