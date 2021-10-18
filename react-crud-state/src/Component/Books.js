@@ -27,10 +27,16 @@ class Book extends Component {
     toast.success("Xóa Thành Công");
   };
 
-  handleEditBook = (book) => {
-    this.setState({
-      editBook: book,
-    });
+  handleEditBook = (bookId, event) => {
+    console.log(bookId);
+    let books = this.state.listBook.slice();
+    for (let i = 0; i < books.length; i++) {
+      let book = books[i];
+      if (books.id == bookId) {
+        books[i].title = event.target.value;
+        this.setState({ listBook: books });
+      }
+    }
   };
 
   render() {
@@ -38,24 +44,20 @@ class Book extends Component {
 
     return (
       <div className="list-book-container">
-        <AddBook addNewBook={this.addNewBook} />
+        <AddBook books={this.state.listBook} addNewBook={this.addNewBook} />
         <div className="list-book-content">
           {listBook &&
             listBook.length > 0 &&
             listBook.map((item, index) => {
               return (
-                <div className="book-child">
-                  <button> {index + 1} </button>
+                <div className="book-child" key={index}>
+                  <button> {item.id} </button>
 
-                  <input value={item.title} />
+                  <input
+                    defaultValue={item.title}
+                    onChange={(event) => this.handleEditBook(event)}
+                  />
 
-                  <button
-                    className="edit"
-                    onClick={() => this.handleEditBook(item)}
-                  >
-                    {" "}
-                    Edit{" "}
-                  </button>
                   <button
                     className="delete"
                     onClick={() => this.handleDeleteBook(item)}
@@ -67,6 +69,25 @@ class Book extends Component {
               );
             })}
         </div>
+
+        <table border="2">
+          <thead>
+            <tr>
+              <td>ID</td>
+              <td>Name</td>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.listBook.map((book, key) => {
+              return (
+                <tr key={key}>
+                  <td>{book.id}</td>
+                  <td>{book.title}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     );
   }

@@ -11,7 +11,7 @@ class addBook extends Component {
 
   handleAdd = () => {
     let book = {
-      id: Math.floor(Math.random() * 10000),
+      id: Math.floor(Math.random() * 10),
       title: this.state.title,
     };
     this.props.addNewBook(book);
@@ -28,7 +28,6 @@ class addBook extends Component {
           value={title}
           onChange={(event) => this.handleOnchangeTitle(event)}
         />
-        {this.state["title"]}
 
         <button type="button" className="add" onClick={() => this.handleAdd()}>
           Add
