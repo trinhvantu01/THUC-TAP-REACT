@@ -1,7 +1,7 @@
 import './App.css';
 import React,{Component} from 'react';
 import {connect} from "react-redux";
-import {deleteUser,saveUser} from './actions/index'
+import {deleteUser,saveUser,editUser} from './actions/index'
 
 export class App extends Component{
   constructor (props, context){
@@ -27,7 +27,7 @@ export class App extends Component{
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const validateEmail = re.test(String(email).toLowerCase());
      if( validateEmail === false){
-     alert('please, your email is invalid');
+     alert('email của bạn không hợp lệ');
   return false;
 }
     this.props.dispatch(saveUser({name: name, email: email, id: userId}));
@@ -43,6 +43,11 @@ export class App extends Component{
       }
     }
   }
+
+  editUser(userId,event){
+    this.props.dispatch(editUser(userId,event))
+  }
+
   deleteUser(userId){
     this.props.dispatch(deleteUser(userId));
   }
@@ -68,7 +73,7 @@ export class App extends Component{
             </tr>
           </thead>  
         <tbody>
-          {users.map((user, key)=>{
+          {users.map((user,key)=>{
             return(
               <tr key ={user.id}>
                 <td>{user.id}</td>

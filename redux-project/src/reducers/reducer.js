@@ -17,7 +17,7 @@ const getIndexOfUser = (users,userId)=>{
 
 export const userReducer =(state = listUser,action)=>{
     let users = state.slice();
-    let nexUserId = users.length + 1;
+    var nexUserId = users.length + 1;
     switch (action.type){
         case "SAVE_USER":
             if(action.data.userId){
@@ -27,8 +27,6 @@ export const userReducer =(state = listUser,action)=>{
                     users[index].email = action.data.email;
                 }
             } else{
-
-            
             users.push({
                 id:nexUserId,
                 name: action.data.name,
@@ -36,7 +34,6 @@ export const userReducer =(state = listUser,action)=>{
             });
         }
             break;
-
         case "ADD_USER":
             users.push({
                 id:nexUserId,
