@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from 'react-redux';
+import {Provider} from "react-redux";
 import {createStore} from 'redux';
-import rootReducer from './reducers/rootReducer';
+import allReducers from './reducers';
 
-const reduxStore = createStore(rootReducer);
+const store = createStore(allReducers)
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={reduxStore}>
+    <Provider store={store}>
     <App />
     </Provider>
-   
+  
   </React.StrictMode>,
   document.getElementById('root')
 );
