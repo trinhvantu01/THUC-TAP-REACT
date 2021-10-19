@@ -20,8 +20,8 @@ export const userReducer =(state = listUser,action)=>{
     var nexUserId = users.length + 1;
     switch (action.type){
         case "SAVE_USER":
-            if(action.id){
-                var index = getIndexOfUser(users,action.data.id);
+            if(action.data.userId){
+                var index = getIndexOfUser(users,action.data.userId);
                 if(index !== -1){
                     users[index].name = action.data.name;
                     users[index].email = action.data.email;
