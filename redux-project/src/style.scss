@@ -1,0 +1,59 @@
+$buttonColorSave: #2a832d;
+$buttonColorEdit: #0192d8;
+$buttonColorDelete: #f62135;
+body {
+    width: 700px;
+    margin: 15px auto;
+    .App {
+        border: 1px solid #ccc;
+
+        padding: 0px 20px;
+
+        input {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .table-form {
+            width: 100%;
+            padding: 23px 87px;
+            margin: 10px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .buttonsave {
+            background-color: #2a832d;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .buttonedit {
+            background-color: #0192d8;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .buttondelete {
+            background-color: #f62135;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+        }
+    }
+}

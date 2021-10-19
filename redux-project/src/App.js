@@ -62,7 +62,7 @@ export class App extends Component{
         <input type="hidden" id="user_id"/>
         <label> Email Address</label>
         <input type="email" id="email" name="email" placeholder="Enter email"/>
-        <button onClick={this.saveUser}> Save</button>
+        <button className="buttonsave" onClick={this.saveUser}> Save</button>
         <table border="1" className="table-form">
           <thead>
             <tr>
@@ -80,10 +80,10 @@ export class App extends Component{
                 <td className="name">{user.name}</td>
                 <td>{user.email}</td>
                 <td>
-                  <button type="edit" onClick={this.handlerEdit.bind(this,user.id)}>
+                  <button className="buttonedit" type="edit" onClick={this.handlerEdit.bind(this,user.id)}>
                     Edit
                   </button>
-                  <button type="delete" onClick={this.deleteUser.bind(this,user.id)}>
+                  <button className="buttondelete" type="delete" onClick={this.deleteUser.bind(this,user.id)}>
                   
                   Delete
                   </button>
