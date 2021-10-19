@@ -5,7 +5,7 @@ import {deleteUser,saveUser,editUser} from './actions/index'
 
 export class App extends Component{
   constructor (props, context){
-    super(props, context);
+    super (props, context);
     this.handleChange = this.handleChange.bind(this);
     this.saveUser = this.saveUser.bind(this);
   }
@@ -37,9 +37,9 @@ export class App extends Component{
     for(let i = 0; i< users.length; i++ ){
       let user = users[i];
       if(user.id == userId){
-        document.getElementById('name'). value= user.name;
-        document.getElementById('email'). value= user.email;
-        document.getElementById('user_id'). value= userId;
+        document.getElementById('name'). value = user.name;
+        document.getElementById('email'). value = user.email;
+        document.getElementById('user_id'). value = userId;
       }
     }
   }
