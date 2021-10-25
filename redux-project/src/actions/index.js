@@ -40,9 +40,23 @@ export const deleteUser = (userId)=>{
 };
 
 export const listUser = ()=>{
-    return{
-         type:"LIST_USER",
-
-    };
+    return dispatch => {
+     fetch("http://localhost:3000/api/user/list").then(res => res.json()).then(
+         (result)=>{ dispatch( fetchUsers(result))},
+         (error)=> {dispatch(handlerError(error))}
+     );
+    }
       
 };
+export const handlerError = (error) =>{
+    return{
+        type: 'API_ERROR',
+        message : error
+    }
+}
+const fetchUsers = (users) =>{
+    return {
+         type: 'LIST',
+         users: users
+    }
+}

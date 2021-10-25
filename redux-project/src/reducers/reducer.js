@@ -1,8 +1,8 @@
 const listUser =[
-    {id: 1, name: "Văn Tú", email: "vantu@gmail.com"},
-    {id: 2, name: "Văn Tú2", email: "vantu2@gmail.com"},
-    {id: 3, name: "Văn Tú3", email: "vantu3@gmail.com"},
-    {id: 4, name: "Văn Tú4", email: "vantu4@gmail.com"},
+    // {id: 1, name: "Văn Tú", email: "vantu@gmail.com"},
+    // {id: 2, name: "Văn Tú2", email: "vantu2@gmail.com"},
+    // {id: 3, name: "Văn Tú3", email: "vantu3@gmail.com"},
+    // {id: 4, name: "Văn Tú4", email: "vantu4@gmail.com"},
 ];
 
 const getIndexOfUser = (users,userId)=>{
@@ -59,6 +59,8 @@ export const userReducer =(state = listUser,action)=>{
                     break;
                     
              case "LIST_USER" :
+                 users = action.users;
+                 break;
                  default:
                      break; 
             

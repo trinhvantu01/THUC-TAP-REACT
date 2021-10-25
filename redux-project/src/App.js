@@ -1,7 +1,7 @@
 import './App.css';
 import React,{Component} from 'react';
 import {connect} from "react-redux";
-import {deleteUser,saveUser,editUser} from './actions/index'
+import {deleteUser,saveUser,editUser, addUser, listUser} from './actions/index'
 
 export class App extends Component{
   constructor (props, context){
@@ -62,11 +62,11 @@ export class App extends Component{
         <input type="hidden" id="user_id"/>
         <label> Email Address</label>
         <input type="email" id="email" name="email" placeholder="Enter email"/>
-        <button className="buttonsave" onClick={this.saveUser}> Save</button>
-        <table border="1" className="table-form">
+        <button className="btn btn-success" onClick={this.saveUser}> Save</button>
+        <table  className="table table-bordered">
           <thead>
             <tr>
-              <th>No</th>
+              <th>No</th> 
               <th>Name</th>
               <th>Email</th>
               <th>Action</th>
@@ -80,10 +80,10 @@ export class App extends Component{
                 <td className="name">{user.name}</td>
                 <td>{user.email}</td>
                 <td>
-                  <button className="buttonedit" type="edit" onClick={this.handlerEdit.bind(this,user.id)}>
+                  <button className="btn btn-primary" type="edit" onClick={this.handlerEdit.bind(this,user.id)}>
                     Edit
                   </button>
-                  <button className="buttondelete" type="delete" onClick={this.deleteUser.bind(this,user.id)}>
+                  <button className="btn btn-danger" type="delete" onClick={this.deleteUser.bind(this,user.id)}>
                   
                   Delete
                   </button>
@@ -92,7 +92,14 @@ export class App extends Component{
             );
           })}
         </tbody>
+       
+       
         </table>
+        <button type="button" class="btn btn-warning">Chọn tất cả</button>
+        <button className="btn btn-danger" type="delete">  Delete </button>
+
+
+        
       </div>
     </div>
     );
@@ -104,4 +111,13 @@ const mapStatesToProps = (state) =>{
     users:state.user,
   };
 };
-export default connect(mapStatesToProps) (App);
+
+const mapDipatchToProps= (dispatch) =>{
+  return{
+    addUser:() =>dispatch(addUser()),
+    editUser :(id,event)=> dispatch(editUser(id,event)),
+    deleteUser: (id) => dispatch(deleteUser(id)),
+    listUser:() =>dispatch(listUser())
+  }
+}
+export default connect(mapStatesToProps,mapDipatchToProps) (App);
