@@ -1,19 +1,20 @@
-{
-    "User": [
-        {
-            "id": 1,
-            "age": 20,
-            "email": "tu@gmail.com"
-        },
-        {
-            "id": 2,
-            "age": 21,
-            "email": "vantu@gmail.com"
-        },
-        {
-            "id": 3,
-            "age": 22,
-            "email": "trinhvantu@gmail.com"
-        }
-    ]
-}
+[
+    {
+        "id": 1,
+        "name": "tu",
+        "age": 20,
+        "email": "tu@gmail.com"
+    },
+    {
+        "id": 2,
+        "name": "vantu",
+        "age": 21,
+        "email": "vantu@gmail.com"
+    },
+    {
+        "id": 3,
+        "name": "trinhvantu",
+        "age": 22,
+        "email": "trinhvantu@gmail.com"
+    }
+]

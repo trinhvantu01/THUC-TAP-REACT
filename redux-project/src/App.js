@@ -1,123 +1,137 @@
-import './App.css';
-import React,{Component} from 'react';
-import {connect} from "react-redux";
+import React,{useState} from 'react';
+import {connect,useSelector} from "react-redux";
 import {deleteUser,saveUser,editUser, addUser, listUser} from './actions/index'
+import { useForm } from "react-hook-form";
 
-export class App extends Component{
-  constructor (props, context){
-    super (props, context);
-    this.handleChange = this.handleChange.bind(this);
-    this.saveUser = this.saveUser.bind(this);
-  }
-  handleChange(event){
-    this.setState({value: event.target.value});
-  }
-  saveUser(){
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let userId = document.getElementById("user_id").value;
-    if(name == '' || name == undefined){
-      alert("Vui lòng nhập tên đầy đủ của bạn");
-      return false;
+
+function App(props) {
+  let { dispatch } = props;
+  const users = useSelector((state) => state.user);
+  const [value, setValue] = useState("");
+  const [userSelected, setUserSelected] = useState(null);
+
+  const { register, handleSubmit } = useForm();
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+  const validateEmail = (email, userId) => {
+    let message = "";
+
+    if (email == "" || email == undefined) {
+      return "Vui lòng nhập email đầy đủ của bạn";
     }
-    if (email == '' || email == undefined){
-      alert("Vui lòng nhập email đầy đủ của bạn");
-      return false;
-    }
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const validateEmail = re.test(String(email).toLowerCase());
-     if( validateEmail === false){
-     alert('email của bạn không hợp lệ');
-  return false;
-}
-    this.props.dispatch(saveUser({name: name, email: email, id: userId}));
-  }
-  handlerEdit(userId){
-    let users = this.props.users;
-    for(let i = 0; i< users.length; i++ ){
-      let user = users[i];
-      if(user.id == userId){
-        document.getElementById('name'). value = user.name;
-        document.getElementById('email'). value = user.email;
-        document.getElementById('user_id'). value = userId;
+    if (validateEmail == false) {
+      return "Vui lòng nhập thông tin email chính xác của bạn!!!";
+    }
+
+    if (users.length) {
+      for (let i = 0; i < users.length; i++) {
+        if (userId == 0 && users[i].email == email) {
+          return "Email của bạn bị trùng lặp, vui lòng đăng nhập lại email của bạn";
+        }
+        if (userId != 0) {
+          if (userId != users[i].id && users[i].email == email) {
+            return "Email của bạn bị trùng lặp, vui lòng đăng nhập lại email của bạn";
+          }
+        }
       }
     }
-  }
+    return message;
+  };
+  const handleSaveUser = (values) => {
+    console.log("values", values);
+    let message = null;
+    const checkEmail = users.find(
+      (user) => user.email.toLowerCase() === values.email.toLowerCase()
+    );
+    if (checkEmail) {
+      message = "Email của bạn bị trùng lặp, vui lòng đăng nhập lại email của bạn";
+    }
+    if (message) {
+      alert(message);
+      return false;
+    }
 
-  editUser(userId,event){
-    this.props.dispatch(editUser(userId,event))
-  }
+    dispatch(saveUser(values));
+  };
+  const handleEditUser = (userId) => {};
+  const handleDeleteUser = (userId) => {
+    dispatch(deleteUser(userId));
+  };
+  const clearSelected = () => {
+    setUserSelected(null);
+  };
 
-  deleteUser(userId){
-    this.props.dispatch(deleteUser(userId));
-  }
-  render(){
-    const users = this.props.users;
-    return(
+  return (
     <div className="App">
-      <div className="Container">
-        <h1> React-Redux</h1>
-        <label>Name</label>
-        <input type="text" id="name" placeholder="Enter Name"/>
-        <input type="hidden" id="user_id"/>
-        <label> Email Address</label>
-        <input type="email" id="email" name="email" placeholder="Enter email"/>
-        <button className="btn btn-success" onClick={this.saveUser}> Save</button>
-        <table  className="table table-bordered">
+      <div className="container">
+        <h1>React-redux</h1>
+        <form
+          onSubmit={
+            userSelected
+              ? handleSubmit(handleEditUser)
+              : handleSubmit(handleSaveUser)
+          }
+        >
+          <label>Name</label>
+          <input type="text" {...register("name")} placeholder="Your name" />
+
+          <label>Email Address</label>
+          <input type="email" {...register("email")} placeholder="Your email" />
+          <button type="submit">Save</button>
+          {userSelected && (
+            <button type="button" onClick={clearSelected}>
+              ClearSelect
+            </button>
+          )}
+        </form>
+        <table border="1" className="table-form">
           <thead>
             <tr>
-              <th>No</th> 
+              <th>No.</th>
               <th>Name</th>
               <th>Email</th>
               <th>Action</th>
             </tr>
-          </thead>  
-        <tbody>
-          {users.map((user,key)=>{
-            return(
-              <tr key ={user.id}>
-                <td>{user.id}</td>
-                <td className="name">{user.name}</td>
-                <td>{user.email}</td>
-                <td>
-                  <button className="btn btn-primary" type="edit" onClick={this.handlerEdit.bind(this,user.id)}>
-                    Edit
-                  </button>
-                  <button className="btn btn-danger" type="delete" onClick={this.deleteUser.bind(this,user.id)}>
-                  
-                  Delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-       
-       
+          </thead>
+          <tbody>
+            {users.map((user, index) => {
+              return (
+                <tr key={`user-${index}`}>
+                  <td>{user.id}</td>
+                  <td className="name">{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        setUserSelected(user);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="delete"
+                      onClick={() => {
+                        handleDeleteUser(user.id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
-        <button type="button" class="btn btn-warning">Chọn tất cả</button>
-        <button className="btn btn-danger" type="delete">  Delete </button>
-
-
-        
       </div>
     </div>
-    );
-  }
+  );
 }
-
-const mapStatesToProps = (state) =>{
-  return{
-    users:state.user,
-  };
-};
-
-const mapDipatchToProps= (dispatch) =>{
-  return{
-    addUser:() =>dispatch(addUser()),
-    editUser :(id,event)=> dispatch(editUser(id,event)),
-    deleteUser: (id) => dispatch(deleteUser(id)),
-    listUser:() =>dispatch(listUser())
-  }
-}
-export default connect(mapStatesToProps,mapDipatchToProps) (App);
+const mapStatesToProps = (state) => ({
+  users: state.user,
+});
+export default connect(mapStatesToProps)(App);
