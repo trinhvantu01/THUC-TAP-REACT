@@ -25,8 +25,20 @@ app.get('/api/users/list', async (req, res) => {
     },2000);
 });
 
+// function add(data) {
+//     const addProduct = [data, ...products]
+//     return fs.writeFileSync(
+//         "./src/api/user.json",
+//         JSON.stringify(addProduct)
+//     )
+// }
 
 
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+
+// module.exports = {
+//     add,
+// }

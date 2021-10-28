@@ -41,6 +41,22 @@ export const addUser = (data) => {
       userId: userId,
     };
   };
+
+//   function addProduct(ctx) {
+//     try {
+//         const postData = ctx.request.body
+//         addUser(postData)
+//         ctx.status = 201
+//         return (ctx.body = {
+//             success: true,
+//         })
+//     } catch (e) {
+//         return (ctx.body = {
+//             success: false,
+//             error: e.message,
+//         })
+//     }
+// }
   
   export const listUser = () => async(dispatch)=> {
     try {
@@ -52,5 +68,8 @@ export const addUser = (data) => {
     }
   };
   
-  
+//   module.exports = {
+ 
+//     addProduct,
+// }
   
