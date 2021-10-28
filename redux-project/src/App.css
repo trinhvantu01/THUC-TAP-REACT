@@ -1,12 +1,10 @@
 .App {
     text-align: center;
-    width: 700px;
+    width: 900px;
+    height: 800px;
     margin: 10px auto;
     border: 1px solid #afafaf;
     padding: 20px 10px;
-}
-h1 {
-    background-color: #ccc;
 }
 
 label,
@@ -14,16 +12,6 @@ button {
     float: left;
 }
 input {
-    width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-table {
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid rgb(180, 180, 180);
+    margin: 10px 0;
 }

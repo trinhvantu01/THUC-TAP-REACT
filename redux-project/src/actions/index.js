@@ -1,5 +1,8 @@
+import userApi from "../api/userAPI";
+
 export const addUser = (data) => {
     return {
+      
       type: "ADD_USER",
       data: {
         name: data.name,
@@ -7,12 +10,20 @@ export const addUser = (data) => {
       },
     };
   };
-  export const saveUser = (data) => {
-    return {
-      type: "SAVE_USER",
-      payload: data,
-    };
-  };
+
+//   export const saveUser = (data) => {
+//     return dispatch => {
+//         fetch("http://localhost:3000/api/user/save",{
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify(data)
+//         }).then(res => res.json()).then(
+//             (result) => { dispatch(fetchuser(result))},
+//             (error) => { dispatch(handlerError(error)) }
+//         );
+//     }
+// };
+
   export const editUser = (userId, data) => {
     return {
       type: "EDIT_USER",
@@ -31,9 +42,15 @@ export const addUser = (data) => {
     };
   };
   
-  export const listUser = () => {
-    return {
-      type: "LIST_USER",
-    };
+  export const listUser = () => async(dispatch)=> {
+    try {
+      const {data} = await userApi.getAll();
+      // console.log(data);
+      dispatch({type : "LIST_USER",payload:data});
+    } catch (error){
+      console.log(error);
+    }
   };
+  
+  
   

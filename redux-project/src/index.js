@@ -4,31 +4,33 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { persistReducer, persistStore } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { PersistGate } from "redux-persist/integration/react";
-import thunkMiddleware from "redux-thunk";
-import allReducers from "./reducer";
+// import { createStore, applyMiddleware } from "redux";
+// import { composeWithDevTools } from "redux-devtools-extension";
+// import { persistReducer, persistStore } from "redux-persist";
+// import storage from "redux-persist/lib/storage";
+// import { PersistGate } from "redux-persist/integration/react";
+import store from "./store";
+// import thunkMiddleware from "redux-thunk";
+// import allReducers from "./reducers";
 
-const persistConfig = {
-  key: "root",
-  storage,
-};
-const persistedReducer = persistReducer(persistConfig, allReducers);
-const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
+// const persistConfig = {
+//   key: "root",
+//   storage,
+// };
+// const persistedReducer = persistReducer(persistConfig, allReducers);
+// const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
 
-const store = createStore(persistedReducer, composedEnhancer);
+// const store = createStore(persistedReducer, composedEnhancer);
 
-const persistor = persistStore(store);
+// const persistor = persistStore(store);
+
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+ 
         <App />
-      </PersistGate>
+     
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

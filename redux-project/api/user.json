@@ -16,5 +16,11 @@
         "name": "trinhvantu",
         "age": 22,
         "email": "trinhvantu@gmail.com"
+    },
+    {
+        "id": 4,
+        "name": "trinhvantu444",
+        "age": 242,
+        "email": "tri444nhvantu@gmail.com"
     }
 ]
