@@ -1,17 +1,12 @@
 <?php
-function righteous($num)
+function righteous($number)
 {
-    if ($num <= 0)
-        return false;
-    $square = 0;
-    $i = 1;
-    while ($square <= $num) {
+    for ($i = 1; $i < $number; $i++) {
         $square = $i * $i;
-        if ($square == $num)
+        if ($square == $number) {
             return true;
-        $i++;
+        }
     }
-    return false;
 }
 if (righteous(4))
     echo ' là số chính phương';

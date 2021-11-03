@@ -9,7 +9,7 @@ let classUsers = [
   ];
   classUsers.map((user) => {
     if (user.name.charAt(0) == "T") {
-      user.score > 5 ? console.log(user.name) : "";
+      user.score > 5 && console.log(user.name) ;
       // console.log(user.name);
     }
   });
